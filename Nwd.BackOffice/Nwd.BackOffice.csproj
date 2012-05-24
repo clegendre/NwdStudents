@@ -47,10 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAnnotations\FileAttribute.cs" />
     <Compile Include="Model\Album.cs" />
     <Compile Include="Model\Artist.cs" />
-    <Compile Include="DataAnnotations\ValidFileSystemName.cs" />
     <Compile Include="Impl\AlbumRepository.cs" />
     <Compile Include="Model\NwdBackOfficeContext.cs" />
     <Compile Include="DataAnnotations\RequiredIf.cs" />
