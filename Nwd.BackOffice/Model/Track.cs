@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Web;
-using Nwd.BackOffice.DataAnnotations;
 using System.Web.Mvc;
 
 namespace Nwd.BackOffice.Model

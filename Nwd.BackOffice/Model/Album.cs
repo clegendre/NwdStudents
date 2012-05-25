@@ -5,7 +5,6 @@ using System.Text;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Mvc;
 using System.Web;
-using Nwd.BackOffice.DataAnnotations;
 
 namespace Nwd.BackOffice.Model
 {
