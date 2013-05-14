@@ -40,7 +40,7 @@ namespace Nwd.FrontOffice.Impl
                     Albums = (from a in ctx.Albums
                               select new AlbumThumbnailViewModel
                               {
-                                  AlbumId = a.Id,
+                                  AlbumId = a.Id.Value,
                                   AlbumName = a.Title,
                                   ArtistName = a.Artist.Name,
                                   CoverImageUrl = a.CoverImagePath,

@@ -12,7 +12,7 @@ namespace Nwd.BackOffice.Model
     {
         [Key]
         [Column( Order = 0 )]
-        public int AlbumId { get; set; }
+        public int? AlbumId { get; set; }
 
         [Key]
         [Column( Order = 1 )]
