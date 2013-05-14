@@ -10,6 +10,14 @@ namespace Nwd.BackOffice.Impl
 {
     public class AlbumRepository
     {
+        public List<Album> GetAllAlbums()
+        {
+            using( var ctx = new NwdBackOfficeContext() )
+            {
+                return ctx.Albums.ToList();
+            }
+        }
+
         public bool AlbumExists( Album album )
         {
             if( album == null )
