@@ -12,7 +12,7 @@ namespace Nwd.BackOffice.Impl
     {
         public List<Album> GetAllAlbums()
         {
-            using( var ctx = new NwdBackOfficeContext() )
+            using( var ctx = new NwdMusikEntities() )
             {
                 return ctx.Albums.ToList();
             }
@@ -29,7 +29,7 @@ namespace Nwd.BackOffice.Impl
             {
                 throw new ArgumentNullException( "album" );
             }
-            using( var ctx = new NwdBackOfficeContext() )
+            using( var ctx = new NwdMusikEntities() )
             {
                 return ctx.Albums.Any( a => a.Title == album.Title );
             }
@@ -52,7 +52,7 @@ namespace Nwd.BackOffice.Impl
                 throw new ArgumentNullException( "server" );
             }
 
-            using( var ctx = new NwdBackOfficeContext() )
+            using( var ctx = new NwdMusikEntities() )
             {
                 album = ctx.Albums.Add( album );
 
@@ -87,7 +87,7 @@ namespace Nwd.BackOffice.Impl
 
         public Album GetAlbumForEdit( int idAlbum )
         {
-            using( var ctx = new NwdBackOfficeContext() )
+            using( var ctx = new NwdMusikEntities() )
             {
                 return ctx.Albums.Include( "Tracks" ).Include( "Tracks.Song" ).Include( "Artist" ).SingleOrDefault( a => a.Id == idAlbum );
             }
@@ -95,7 +95,7 @@ namespace Nwd.BackOffice.Impl
 
         public Album EditAlbum( HttpServerUtilityBase server, Album album )
         {
-            using( var ctx = new NwdBackOfficeContext() )
+            using( var ctx = new NwdMusikEntities() )
             {
                 album = ctx.Albums.Attach( album );
                 ctx.Entry( album ).Reference( e => e.Artist ).Load();
@@ -140,7 +140,7 @@ namespace Nwd.BackOffice.Impl
         {
             directory = String.Format( "/Content/musics/{0}/", album.Title );
             physDirectory = server.MapPath( directory );
-            if( !Directory.Exists( physDirectory ) )
+            if( physDirectory != null && !Directory.Exists( physDirectory ) )
             {
                 Directory.CreateDirectory( physDirectory );
             }
@@ -151,8 +151,11 @@ namespace Nwd.BackOffice.Impl
             if( Path.GetExtension( file.FileName ) != ".mp3" ) throw new ApplicationException( "The file must be an .mp3 file" );
 
             string fileName = Path.GetFileName( file.FileName );
-            string physPath = Path.Combine( physDirectory, fileName );
-            file.SaveAs( physPath );
+            if( physDirectory != null )
+            {
+                string physPath = Path.Combine( physDirectory, fileName );
+                file.SaveAs( physPath );
+            }
             return fileName;
         }
     }

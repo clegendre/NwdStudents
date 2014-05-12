@@ -15,10 +15,10 @@ namespace Nwd.Tests
         [Test]
         public void Database_Should_Always_Be_Created()
         {
-            Database.SetInitializer(new DropCreateDatabaseAlways<NwdBackOfficeContext>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<NwdMusikEntities>());
             Database.SetInitializer( new DropCreateDatabaseAlways<NwdFrontOfficeContext>() );
 
-            using (var ctx = new NwdBackOfficeContext())
+            using (var ctx = new NwdMusikEntities())
             {
                 ctx.Database.Initialize(true);
                 Assert.That(ctx.Database.Exists());

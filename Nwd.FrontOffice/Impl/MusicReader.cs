@@ -12,7 +12,7 @@ namespace Nwd.FrontOffice.Impl
     {
         public MiniPlayer GetMiniPlayerFor( int idAlbum, int trackNumber )
         {
-            using( var ctx = new NwdBackOfficeContext() )
+            using( var ctx = new NwdMusikEntities() )
             {
                 return
                     (
@@ -33,14 +33,14 @@ namespace Nwd.FrontOffice.Impl
 
         public Catalog GetCatalog()
         {
-            using( var ctx = new NwdBackOfficeContext() )
+            using( var ctx = new NwdMusikEntities() )
             {
                 return new Catalog
                 {
                     Albums = (from a in ctx.Albums
                               select new AlbumThumbnailViewModel
                               {
-                                  AlbumId = a.Id.Value,
+                                  AlbumId = a.Id,
                                   AlbumName = a.Title,
                                   ArtistName = a.Artist.Name,
                                   CoverImageUrl = a.CoverImagePath,
@@ -58,7 +58,7 @@ namespace Nwd.FrontOffice.Impl
                 throw new ArgumentException( "The id of the album must not be 0", "idAlbum" );
             }
 
-            using( var ctx = new NwdBackOfficeContext() )
+            using( var ctx = new NwdMusikEntities() )
             {
                 Album album = ctx.Albums.SingleOrDefault( a => a.Id == idAlbum );
                 if( album != null )
