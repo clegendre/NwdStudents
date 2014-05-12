@@ -18,6 +18,11 @@ namespace Nwd.BackOffice.Impl
             }
         }
 
+        /// <summary>
+        /// Gets wether an album exists or not.
+        /// </summary>
+        /// <param name="album"></param>
+        /// <returns></returns>
         public bool AlbumExists( Album album )
         {
             if( album == null )
@@ -30,6 +35,12 @@ namespace Nwd.BackOffice.Impl
             }
         }
 
+        /// <summary>
+        /// Create an album and add it to the store. An album is composed of tracks.
+        /// </summary>
+        /// <param name="album"></param>
+        /// <param name="server"></param>
+        /// <returns></returns>
         public Album CreateAlbum( Album album, HttpServerUtilityBase server )
         {
             if( album == null )
@@ -47,7 +58,7 @@ namespace Nwd.BackOffice.Impl
 
                 string directory;
                 string physDirectory;
-                EnsureDirectory( album, server, out directory, out physDirectory );
+                EnsureDirectory( server, album, out directory, out physDirectory );
 
                 foreach( var track in album.Tracks )
                 {
@@ -82,17 +93,17 @@ namespace Nwd.BackOffice.Impl
             }
         }
 
-        public Album EditAlbum( Album album, HttpServerUtilityBase server )
+        public Album EditAlbum( HttpServerUtilityBase server, Album album )
         {
             using( var ctx = new NwdBackOfficeContext() )
             {
                 album = ctx.Albums.Attach( album );
                 ctx.Entry( album ).Reference( e => e.Artist ).Load();
                 ctx.Entry( album ).Collection( e => e.Tracks ).Load();
-                
+
                 string directory;
                 string physDirectory;
-                EnsureDirectory( album, server, out directory, out physDirectory );
+                EnsureDirectory( server, album, out directory, out physDirectory );
 
                 foreach( var track in album.Tracks )
                 {
@@ -125,7 +136,7 @@ namespace Nwd.BackOffice.Impl
             }
         }
 
-        private static void EnsureDirectory( Album album, HttpServerUtilityBase server, out string directory, out string physDirectory )
+        private static void EnsureDirectory( HttpServerUtilityBase server, Album album, out string directory, out string physDirectory )
         {
             directory = String.Format( "/Content/musics/{0}/", album.Title );
             physDirectory = server.MapPath( directory );
