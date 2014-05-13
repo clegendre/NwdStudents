@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nwd.BackOffice", "Nwd.BackOffice\Nwd.BackOffice.csproj", "{C38E58AF-920C-488B-B0A6-420D8B50B060}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Nwd.FrontOffice", "Nwd.FrontOffice\Nwd.FrontOffice.csproj", "{9A01CCE5-C016-4E3A-BFCC-1124C6390083}"
