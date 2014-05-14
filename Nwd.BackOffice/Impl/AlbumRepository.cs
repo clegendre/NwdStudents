@@ -31,7 +31,7 @@ namespace Nwd.BackOffice.Impl
             }
             using( var ctx = new NwdMusikEntities() )
             {
-                return ctx.Albums.Any( a => a.Title == album.Title );
+                return ctx.Albums.Where( a => a.Id != album.Id  ).Any( a => a.Title == album.Title );
             }
         }
 
@@ -97,9 +97,9 @@ namespace Nwd.BackOffice.Impl
         {
             using( var ctx = new NwdMusikEntities() )
             {
-                album = ctx.Albums.Attach( album );
-                ctx.Entry( album ).Reference( e => e.Artist ).Load();
-                ctx.Entry( album ).Collection( e => e.Tracks ).Load();
+                //album = ctx.Albums.Attach( album );
+                //ctx.Entry( album ).Reference( e => e.Artist ).Load();
+                //ctx.Entry( album ).Collection( e => e.Tracks ).Load();
 
                 string directory;
                 string physDirectory;
@@ -113,6 +113,9 @@ namespace Nwd.BackOffice.Impl
                         //TODO delete previous file
                         string fileName = SaveFile( physDirectory, file );
                         track.FileRelativePath = Path.Combine( directory, fileName );
+
+                        //ctx.Entry( track ).State = System.Data.Entity.EntityState.Added;
+                        //ctx.Entry( track.Song ).State = System.Data.Entity.EntityState.Added;
                     }
 
                     //else do not change the FileRelativePath since it is send by the form in an hidden input
@@ -126,11 +129,11 @@ namespace Nwd.BackOffice.Impl
                     album.CoverImagePath = Path.Combine( directory, coverFileName );
                 }
 
-                ctx.Entry( album ).State = System.Data.EntityState.Modified;
                 //foreach( var e in ctx.ChangeTracker.Entries() )
                 //{
-                //    e.State = System.Data.EntityState.Modified;
+                //    e.State = System.Data.Entity.EntityState.Modified;
                 //}
+                //ctx.Entry( album ).State = System.Data.Entity.EntityState.Modified;
                 ctx.SaveChanges();
                 return album;
             }
