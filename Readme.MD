@@ -80,10 +80,10 @@ Sur cette page, on peut écouter la musique des pistes audios. L’intégration 
 Pour des questions de SEO
 
 *	L’url de la page de consultation des albums est : **http://localhost/music/albums/catalog/**
-*	L’url de la page de consultation d’un album est le suivant : **http://localhost/music/album/<AlbumID>**
-*	La page de consultation d’un album contient des métas donnés (<meta>) qui décrivent l’album 
-*	Le contenu de l’attribut “content” de la balise meta (<meta name=”description” content=”” />) contient tous les titres des musiques concaténés et séparés par une virgule.
-*	Le contenu de la balise <title> reprendra le titre de l’album
+*	L’url de la page de consultation d’un album est le suivant : **http://localhost/music/album/{AlbumId}**
+*	La page de consultation d’un album contient des métas donnés qui décrivent l’album 
+*	Le contenu de l’attribut **content** de la balise meta contient tous les titres des musiques concaténés et séparés par une virgule.
+*	Le contenu de la balise **title** reprendra le titre de l’album
 *	Dans le cas où l’utilisateur consulte un album qui n’existe pas, il doit être redirigé vers une page 404 spécifique au catalogue et qui indique que l’album demandé n’existe plus.
 
 
@@ -117,4 +117,4 @@ Guidelines
 *	Pour l’upload de fichier, créer un éditeur spécifique (qui se nommera File par exemple)
 *	Le nom de l’album est repris en tant que Dossier sur le disque. Il faut donc que son nom ne contienne PAS de caractères invalides pour le système de fichier
 *	Il ne peut pas y avoir deux albums avec le même nom. Penser à faire une validation ajax qui vérifie l’existence d’un Album avec le nom saisie.
-*	Pour la page de listes des Albums dans la zone Admin, rajouter une méthode ICollection<Album> GetAllAlbums() sur la classe AlbumRepository.
+*	Pour la page de listes des Albums dans la zone Admin, rajouter une méthode ICollection{Album} GetAllAlbums() sur la classe AlbumRepository.
